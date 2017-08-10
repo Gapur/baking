@@ -1,18 +1,23 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./config/db');
+const mongoose = require('mongoose');
 const app = express();
 
 const port = 8000;
 
-app.use(bodyParser.urlencoded({ extended: true }));
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/Tododb'); 
 
-MongoClient.connect(db.url, (err, database) => {
-  if (err) return console.log(err)
-  
-  require('./api/routes/note_routes')(app, database);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-  app.listen(port, () => {
-    console.log('We are live on ' + port);
-  });               
-})
+require('./api/routes/noteRoutes')(app);
+
+app.listen(port, () => {
+  console.log('We are live on ' + port);
+});
+
+app.use(function(req, res) {
+  res.status(404).send({url: req.originalUrl + ' not found'})
+});
