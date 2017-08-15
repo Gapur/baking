@@ -1,4 +1,3 @@
-const mongose = require('mongose');
 const Note = require('../models/note');
 
 module.exports = function(app) {
