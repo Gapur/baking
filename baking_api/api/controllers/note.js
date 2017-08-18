@@ -1,21 +1,27 @@
-const Note = require('../models/note');
+module.exports = function (app, mongoose) {
+  const User = mongoose.model("User");
 
-module.exports = function(app) {
   app.get('/', (req, res) => {
     res.send("<h2>Привет Express!</h2>");
   });
 
   app.get('/note', (req, res) => {
     Note.find({}, (err, notes) => {
-      if (err) res.send(err);
-      res.json(notes);
+      if (err) {
+				res.status(400).json({ error: err.message });
+			} else {
+				res.json({ notes: notes });
+			}
     });
   });
 
   app.get('/note/:id', (req, res) => {
     Note.findById(req.params.NoteId, (err, note) => {
-      if (err) res.send(err);
-      res.json(note);
+      if (err) {
+				res.status(400).json({ error: err.message });
+			} else {
+				res.json({ note: note });
+			}
     });
   });
 
@@ -25,25 +31,51 @@ module.exports = function(app) {
     note.text = req.body.text;
     note.color = req.body.color;
     note.save((err, note) => {
-      if (err) res.send(err);
-      res.json(note);
+      if (err) {
+				res.status(400).json({ error: err.message });
+			} else {
+				res.json({ note: note });
+			}
     });
   });
 
   app.put('/note/:id', (req, res) => {
-    let noteId = req.params.id;
     let update = req.body;
-    Note.findByIdAndUpdate(noteId, update, { new: true }, (err, newNote) => {
-      if (err) res.send(err);
-      res.json(note);
+    Note.findOne({ _id: req.params.id }, (err, note) => {
+      if (err) {
+				res.status(400).json({ error: err.message });
+			} else if (!user) {
+				res.status(400).json({ error: "User not found." });
+			} else {
+        for (let key in req.body) {
+					user[key] = req.body[key];
+        }
+        note.save((err, note) => {
+          if (err) {
+						res.status(400).json({ error: err.message });
+					} else {
+						res.json({ user: user });
+					}
+        });
+      }
     });
   });
 
   app.delete('/note/:id', (req, res) => {
-    let noteId = req.params.id;
-    Note.findByIdAndRemove(noteId, (err, note) => {
-      if (err) res.send(err);
-      res.json(note);
+    Note.findById(req.params.id, (err, note) => {
+      if (err) {
+        res.status(400).json({ error: err.message });
+      } else if (!note) {
+        res.status(400).json({ error: "User not found." });
+      } else {
+        user.remove((err, user) => {
+          if (err) {
+						res.status(400).json({ error: err.message });
+					} else {
+						res.json({ message: "Note removed successfully." });
+					}
+        });
+      }
     });
   });
 };
