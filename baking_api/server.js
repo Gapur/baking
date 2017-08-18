@@ -1,23 +1,35 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const db = require('./config/db');
 const mongoose = require('mongoose');
+
+//load environment
+const environment = process.env.NODE_ENV || "local";
+const config = require('./config/config')[environment];
+console.log("Using Environment: " + config.environment);
+
+//setup Mongoose
+mongoose.Promise = global.Promise;
+const dbUrl = `mongodb://${config.mongo.host}:${config.mongo.port}/${config.mongo.database}`;
+mongoose.connect(dbUrl, (err) => {
+  if (err) throw err;
+  console.log("Mongoose connection successful.");
+});
+
+//setup Express
 const app = express();
 
-const port = 8000;
-
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/BakingDb'); 
-
+//setup body parser so we can access req.body in controllers
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-require('./api/controllers/noteController')(app);
+// include controllers
+require('./api/controllers/note')(app);
 
 app.use(function(req, res) {
   res.status(404).send({ url: req.originalUrl + ' not found' })
 });
 
-app.listen(port, () => {
-  console.log('We are live on ' + port);
+// start Express
+app.listen(config.server.port, () => {
+  console.log(`Web server running on port ${config.server.port}.`);
 });
