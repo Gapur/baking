@@ -1,5 +1,5 @@
 module.exports = function (app, mongoose) {
-  const User = mongoose.model("User");
+  const Note = mongoose.model("Note");
 
   app.get('/', (req, res) => {
     res.send("<h2>Привет Express!</h2>");

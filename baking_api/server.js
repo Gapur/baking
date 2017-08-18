@@ -15,6 +15,9 @@ mongoose.connect(dbUrl, (err) => {
   console.log("Mongoose connection successful.");
 });
 
+//register each model with Mongoose
+require('./api/models/note');
+
 //setup Express
 const app = express();
 
@@ -23,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // include controllers
-require('./api/controllers/note')(app);
+require('./api/controllers/note')(app, mongoose);
 
 app.use(function(req, res) {
   res.status(404).send({ url: req.originalUrl + ' not found' })
