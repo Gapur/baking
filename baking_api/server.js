@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require("passport");
 const jwt = require('jsonwebtoken');
-const auth = require('./passport/auth');
+const auth = require('./passport/passport');
 
 //load environment
 const environment = process.env.NODE_ENV || "local";
@@ -28,8 +28,11 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+//setup passport
+app.use(auth.initialize());
+
 // include controllers
-require('./api/controllers/note')(app, mongoose);
+require('./api/controllers/note')(app, mongoose, auth);
 
 app.use(function(req, res) {
   res.status(404).send({ url: req.originalUrl + ' not found' })

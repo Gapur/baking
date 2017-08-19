@@ -1,4 +1,4 @@
-module.exports = function (app, mongoose) {
+module.exports = function (app, mongoose, auth) {
   const Note = mongoose.model("Note");
 
   app.get('/note', (req, res) => {
@@ -41,7 +41,7 @@ module.exports = function (app, mongoose) {
       if (err) {
 				res.status(400).json({ error: err.message });
 			} else if (!user) {
-				res.status(400).json({ error: "User not found." });
+				res.status(400).json({ error: "Note not found." });
 			} else {
         for (let key in req.body) {
 					user[key] = req.body[key];
@@ -62,7 +62,7 @@ module.exports = function (app, mongoose) {
       if (err) {
         res.status(400).json({ error: err.message });
       } else if (!note) {
-        res.status(400).json({ error: "User not found." });
+        res.status(400).json({ error: "Note not found." });
       } else {
         user.remove((err, user) => {
           if (err) {
