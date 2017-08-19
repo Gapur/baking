@@ -1,4 +1,10 @@
 module.exports = {
+	passportJWT: {
+		jwtSecret: "MyS3cr3tK3Y",
+		jwtSession: {
+				session: false
+		},
+	},
   test: {
 		environment: "test",
 		mongo: {

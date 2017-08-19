@@ -1,10 +1,6 @@
 module.exports = function (app, mongoose) {
   const Note = mongoose.model("Note");
 
-  app.get('/', (req, res) => {
-    res.send("<h2>Привет Express!</h2>");
-  });
-
   app.get('/note', (req, res) => {
     Note.find({}, (err, notes) => {
       if (err) {
