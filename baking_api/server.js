@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const passport = require("passport");
 const jwt = require('jsonwebtoken');
 const winston = require('winston');
+const morgan = require('morgan');
 const auth = require('./passport/passport')();
 
 //load environment
@@ -29,6 +30,9 @@ const app = express();
 //setup body parser so we can access req.body in controllers
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+//log requests to console
+app.use(morgan('combined'));
 
 //setup passport
 app.use(auth.initialize());
