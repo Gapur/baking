@@ -1,12 +1,13 @@
+const passport = require('passport');
 const passportJWT = require("passport-jwt");
-const User = require("./api/models/user");
+const User = require("../api/models/user");
 const config = require('../config/config');
 const ExtractJwt = passportJWT.ExtractJwt;
 const JwtStrategy = passportJWT.Strategy;
 
 const jwtOptions = {
   secretOrKey: config.passportJWT.jwtSecret,
-  jwtFromRequest: ExtractJwt.fromAuthHeader(),
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 };
 
 module.exports = function() {  

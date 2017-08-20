@@ -1,7 +1,7 @@
 module.exports = function (app, mongoose, auth) {
   const Note = mongoose.model("Note");
 
-  app.get('/note', (req, res) => {
+  app.get('/note', auth.authenticate(), (req, res) => {
     Note.find({}, (err, notes) => {
       if (err) {
 				res.status(400).json({ error: err.message });

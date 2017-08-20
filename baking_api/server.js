@@ -3,12 +3,13 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require("passport");
 const jwt = require('jsonwebtoken');
-const auth = require('./passport/passport');
+const winston = require('winston');
+const auth = require('./passport/passport')();
 
 //load environment
 const environment = process.env.NODE_ENV || "local";
 const config = require('./config/config')[environment];
-console.log("Using Environment: " + config.environment);
+winston.info("Using Environment: " + config.environment);
 
 //setup Mongoose
 mongoose.Promise = global.Promise;
@@ -20,6 +21,7 @@ mongoose.connect(dbUrl, (err) => {
 
 //register each model with Mongoose
 require('./api/models/note');
+require('./api/models/user');
 
 //setup Express
 const app = express();
@@ -33,6 +35,7 @@ app.use(auth.initialize());
 
 // include controllers
 require('./api/controllers/note')(app, mongoose, auth);
+require('./api/controllers/auth')(app, mongoose, auth);
 
 app.use(function(req, res) {
   res.status(404).send({ url: req.originalUrl + ' not found' })
