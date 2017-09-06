@@ -42,4 +42,14 @@ module.exports = function(app, mongoose, auth) {
       });
     }
   });
+
+  app.get('/user', (req, res) => {
+    User.find({}, (err, users) => {
+      if (err) {
+        res.status(400).json({ message: err.message });
+      } else {
+        res.json({ users });
+      }
+    });
+  });
 };
