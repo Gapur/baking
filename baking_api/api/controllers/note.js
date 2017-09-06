@@ -6,7 +6,7 @@ module.exports = function (app, mongoose, auth) {
       if (err) {
 				res.status(400).json({ error: err.message });
 			} else {
-				res.json({ notes: notes });
+				res.json({ notes });
 			}
     });
   });
@@ -16,7 +16,7 @@ module.exports = function (app, mongoose, auth) {
       if (err) {
 				res.status(400).json({ error: err.message });
 			} else {
-				res.json({ note: note });
+				res.json({ note });
 			}
     });
   });
@@ -30,7 +30,7 @@ module.exports = function (app, mongoose, auth) {
       if (err) {
 				res.status(400).json({ error: err.message });
 			} else {
-				res.json({ note: note });
+				res.json({ note });
 			}
     });
   });
@@ -50,7 +50,7 @@ module.exports = function (app, mongoose, auth) {
           if (err) {
 						res.status(400).json({ error: err.message });
 					} else {
-						res.json({ user: user });
+						res.json({ user });
 					}
         });
       }

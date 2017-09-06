@@ -1,10 +1,12 @@
-const config = require('../../config/config');
 const jwt = require('jsonwebtoken');
+const express = require('express');
+const config = require('../../config/config');
 
 module.exports = function(app, mongoose, auth) {
   const User = mongoose.model("User");
+  const apiRoutes = express.Router();
 
-  app.post('/login', (req, res) => {
+  apiRoutes.post('/login', (req, res) => {
     User.findOne({ email: req.body.email }, (err, user) => {
       if (err) {
         res.status(400).json({ success: false, error: err.message });
@@ -14,7 +16,9 @@ module.exports = function(app, mongoose, auth) {
         user.comparePassword(req.body.password, (err, isMatch) => {
           if (isMatch && !err) {
             const payload = { user: user };
-            const token = jwt.sign(payload, config.passportJWT.jwtSecret);
+            const token = jwt.sign(payload, config.passportJWT.jwtSecret, {
+              expiresIn: "10h",
+            });
             res.json({ success: true, message: "ok", token: token });
           } else {
             res.status(401).json({ success: false, message: "Passwords did not match." });
@@ -24,7 +28,7 @@ module.exports = function(app, mongoose, auth) {
     });
   });
 
-  app.post('/signup', (req, res) => {
+  apiRoutes.post('/signup', (req, res) => {
     if (!req.body.email || !req.body.password) {
       res.status(400).json({ success: false, message: ' Please enter email or password.' });
     } else {
@@ -43,7 +47,7 @@ module.exports = function(app, mongoose, auth) {
     }
   });
 
-  app.get('/user', (req, res) => {
+  apiRoutes.get('/user', auth.authenticate(), (req, res) => {
     User.find({}, (err, users) => {
       if (err) {
         res.status(400).json({ message: err.message });
@@ -52,4 +56,6 @@ module.exports = function(app, mongoose, auth) {
       }
     });
   });
+
+  app.use('/api', apiRoutes);
 };
