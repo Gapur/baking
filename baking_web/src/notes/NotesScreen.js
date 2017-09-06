@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class NoteScreen extends Component {
+class NotesScreen extends Component {
   render() {
     return (
       <div>
-        <span>Note Detail</span>
+        <span>Notes Detail</span>
       </div>
     );
   }
 }
 
-export default NoteScreen;
+export default NotesScreen;
