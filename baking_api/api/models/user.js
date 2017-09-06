@@ -23,18 +23,18 @@ const UserSchema = new Schema({
 }, { versionKey: false });
 
 // Saves the user's password hashed (plain text password storage is not good)
-UserSchema.pre('save', function (next) {
+UserSchema.pre('save', function (done) {
   const user = this;
   if (this.isModified('password') || this.isNew) {
     bcrypt.genSalt(10, function (err, salt) {
-      if (err) return next(err);
+      if (err) return done(err);
       bcrypt.hash(user.password, salt, function(err, hash) {
-        if (err) return next(err);
+        if (err) return done(err);
         user.password = hash;
-        next();
+        done();
       });
     });
-  } else return next();
+  } else return done();
 });
 
 // Create method to compare password input to password saved in database

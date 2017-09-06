@@ -53,4 +53,20 @@ module.exports = {
 			port: "8080"
 		},
 	},
+	httpStatus: {
+		success: {
+			OK: 200,
+			Created: 201,
+			NoContent: 204,
+		},
+		client_error: {
+			BadRequest: 400,
+			UnAuthorized: 401,
+			Forbidden: 403,
+			NotFound: 404,
+		},
+		server_error: {
+			InternalServerError: 500,
+		}
+	},
 };
