@@ -1,7 +1,7 @@
-module.exports = function (mongoose, apiRoutes, auth) {
+module.exports = function (mongoose, router, auth) {
   const Note = mongoose.model("Note");
 
-  apiRoutes.get('/note', auth.authenticate(), (req, res) => {
+  router.get('/note', auth.authenticate(), (req, res) => {
     Note.find({}, (err, notes) => {
       if (err) {
 				res.status(400).json({ error: err.message });
@@ -11,7 +11,7 @@ module.exports = function (mongoose, apiRoutes, auth) {
     });
   });
 
-  apiRoutes.get('/note/:id', auth.authenticate(), (req, res) => {
+  router.get('/note/:id', auth.authenticate(), (req, res) => {
     Note.findById(req.params.NoteId, (err, note) => {
       if (err) {
 				res.status(400).json({ error: err.message });
@@ -21,7 +21,7 @@ module.exports = function (mongoose, apiRoutes, auth) {
     });
   });
 
-  apiRoutes.post('/note', auth.authenticate(), (req, res) => {
+  router.post('/note', auth.authenticate(), (req, res) => {
     let note = new Note();
     note.title = req.body.title;
     note.text = req.body.text;
@@ -35,7 +35,7 @@ module.exports = function (mongoose, apiRoutes, auth) {
     });
   });
 
-  apiRoutes.put('/note/:id', auth.authenticate(), (req, res) => {
+  router.put('/note/:id', auth.authenticate(), (req, res) => {
     let update = req.body;
     Note.findOne({ _id: req.params.id }, (err, note) => {
       if (err) {
@@ -57,7 +57,7 @@ module.exports = function (mongoose, apiRoutes, auth) {
     });
   });
 
-  apiRoutes.delete('/note/:id', auth.authenticate(), (req, res) => {
+  router.delete('/note/:id', auth.authenticate(), (req, res) => {
     Note.findById(req.params.id, (err, note) => {
       if (err) {
         res.status(400).json({ error: err.message });
@@ -75,5 +75,5 @@ module.exports = function (mongoose, apiRoutes, auth) {
     });
   });
 
-  return apiRoutes;
+  return router;
 };

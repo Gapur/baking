@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
 const config = require('../../config/config');
 
-module.exports = function(mongoose, apiRoutes, auth) {
+module.exports = function(mongoose, router, auth) {
   const User = mongoose.model("User");
 
-  apiRoutes.post('/login', (req, res) => {
+  router.post('/login', (req, res) => {
     User.findOne({ email: req.body.email }, (err, user) => {
       if (err) {
         res.status(400).json({ success: false, error: err.message });
@@ -26,7 +26,7 @@ module.exports = function(mongoose, apiRoutes, auth) {
     });
   });
 
-  apiRoutes.post('/signup', (req, res) => {
+  router.post('/signup', (req, res) => {
     if (!req.body.email || !req.body.password) {
       res.status(400).json({ success: false, message: ' Please enter email or password.' });
     } else {
@@ -45,7 +45,7 @@ module.exports = function(mongoose, apiRoutes, auth) {
     }
   });
 
-  apiRoutes.get('/user', auth.authenticate(), (req, res) => {
+  router.get('/user', auth.authenticate(), (req, res) => {
     User.find({}, (err, users) => {
       if (err) {
         res.status(400).json({ message: err.message });
@@ -55,5 +55,5 @@ module.exports = function(mongoose, apiRoutes, auth) {
     });
   });
 
-  return apiRoutes;
+  return router;
 };
