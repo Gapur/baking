@@ -1,7 +1,7 @@
-module.exports = function (app, mongoose, auth) {
+module.exports = function (mongoose, apiRoutes, auth) {
   const Note = mongoose.model("Note");
 
-  app.get('/note', auth.authenticate(), (req, res) => {
+  apiRoutes.get('/note', auth.authenticate(), (req, res) => {
     Note.find({}, (err, notes) => {
       if (err) {
 				res.status(400).json({ error: err.message });
@@ -11,7 +11,7 @@ module.exports = function (app, mongoose, auth) {
     });
   });
 
-  app.get('/note/:id', (req, res) => {
+  apiRoutes.get('/note/:id', auth.authenticate(), (req, res) => {
     Note.findById(req.params.NoteId, (err, note) => {
       if (err) {
 				res.status(400).json({ error: err.message });
@@ -21,7 +21,7 @@ module.exports = function (app, mongoose, auth) {
     });
   });
 
-  app.post('/note', (req, res) => {
+  apiRoutes.post('/note', auth.authenticate(), (req, res) => {
     let note = new Note();
     note.title = req.body.title;
     note.text = req.body.text;
@@ -30,12 +30,12 @@ module.exports = function (app, mongoose, auth) {
       if (err) {
 				res.status(400).json({ error: err.message });
 			} else {
-				res.json({ note });
+				res.status(201).json({ note, message: "Successfully new note created." });
 			}
     });
   });
 
-  app.put('/note/:id', (req, res) => {
+  apiRoutes.put('/note/:id', auth.authenticate(), (req, res) => {
     let update = req.body;
     Note.findOne({ _id: req.params.id }, (err, note) => {
       if (err) {
@@ -50,14 +50,14 @@ module.exports = function (app, mongoose, auth) {
           if (err) {
 						res.status(400).json({ error: err.message });
 					} else {
-						res.json({ message: "Note updated successfully." });
+						res.json({ message: "Successfully note updated." });
 					}
         });
       }
     });
   });
 
-  app.delete('/note/:id', (req, res) => {
+  apiRoutes.delete('/note/:id', auth.authenticate(), (req, res) => {
     Note.findById(req.params.id, (err, note) => {
       if (err) {
         res.status(400).json({ error: err.message });
@@ -68,10 +68,12 @@ module.exports = function (app, mongoose, auth) {
           if (err) {
 						res.status(400).json({ error: err.message });
 					} else {
-						res.json({ message: "Note removed successfully." });
+						res.json({ message: "Successfully note removed." });
 					}
         });
       }
     });
   });
+
+  return apiRoutes;
 };

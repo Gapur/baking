@@ -1,10 +1,8 @@
 const jwt = require('jsonwebtoken');
-const express = require('express');
 const config = require('../../config/config');
 
-module.exports = function(app, mongoose, auth) {
+module.exports = function(mongoose, apiRoutes, auth) {
   const User = mongoose.model("User");
-  const apiRoutes = express.Router();
 
   apiRoutes.post('/login', (req, res) => {
     User.findOne({ email: req.body.email }, (err, user) => {
@@ -57,5 +55,5 @@ module.exports = function(app, mongoose, auth) {
     });
   });
 
-  app.use('/api', apiRoutes);
+  return apiRoutes;
 };

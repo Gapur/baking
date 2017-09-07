@@ -39,8 +39,7 @@ app.use(morgan('combined'));
 app.use(auth.initialize());
 
 // include controllers
-require('./api/controllers/note')(app, mongoose, auth);
-require('./api/controllers/auth')(app, mongoose, auth);
+require('./api/controllers')(app, mongoose, auth);
 
 app.use(function(req, res) {
   res.status(404).send({ url: req.originalUrl + ' not found' })
