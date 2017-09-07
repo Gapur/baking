@@ -45,7 +45,7 @@ module.exports = function(mongoose, router, auth) {
     }
   });
 
-  router.get('/user', auth.authenticate(), (req, res) => {
+  router.get('/users', auth.authenticate(), (req, res) => {
     User.find({}, (err, users) => {
       if (err) {
         res.status(400).json({ message: err.message });
