@@ -40,17 +40,17 @@ module.exports = function (app, mongoose, auth) {
     Note.findOne({ _id: req.params.id }, (err, note) => {
       if (err) {
 				res.status(400).json({ error: err.message });
-			} else if (!user) {
+			} else if (!note) {
 				res.status(400).json({ error: "Note not found." });
 			} else {
         for (let key in req.body) {
-					user[key] = req.body[key];
+					note[key] = req.body[key];
         }
-        note.save((err, note) => {
+        note.save((err) => {
           if (err) {
 						res.status(400).json({ error: err.message });
 					} else {
-						res.json({ user });
+						res.json({ message: "Note updated successfully." });
 					}
         });
       }
@@ -64,7 +64,7 @@ module.exports = function (app, mongoose, auth) {
       } else if (!note) {
         res.status(400).json({ error: "Note not found." });
       } else {
-        user.remove((err, user) => {
+        note.remove((err, note) => {
           if (err) {
 						res.status(400).json({ error: err.message });
 					} else {
