@@ -7,19 +7,19 @@ const JwtStrategy = passportJWT.Strategy;
 
 const jwtOptions = {
   secretOrKey: config.passportJWT.jwtSecret,
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt'),
 };
 
 module.exports = function() {  
   const strategy = new JwtStrategy(jwtOptions, function(payload, done) {
-    User.findOne({ id: payload.id }, (req, user) => {
+    User.findById(payload.id, (err, user) => {
       if (err) {
         return done(err, false);
       }
       if (user) {
-        return done(null, { user: user });
+        return done(null, { id: user._id });
       } else {
-        return done(new Error("User not found"), null);
+        return done(new Error("User not found"), false);
       }
     });
   });

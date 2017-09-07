@@ -15,11 +15,11 @@ module.exports = function(app, mongoose, auth) {
       } else {
         user.comparePassword(req.body.password, (err, isMatch) => {
           if (isMatch && !err) {
-            const payload = { user: user };
+            const payload = { id: user._id };
             const token = jwt.sign(payload, config.passportJWT.jwtSecret, {
               expiresIn: "10h",
             });
-            res.json({ success: true, message: "ok", token: token });
+            res.json({ success: true, message: "ok", token: 'JWT ' + token });
           } else {
             res.status(401).json({ success: false, message: "Passwords did not match." });
           }
