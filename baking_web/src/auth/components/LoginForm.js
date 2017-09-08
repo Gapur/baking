@@ -19,11 +19,6 @@ class LoginForm extends Component {
     };
 
     this.handleCheck = this.handleCheck.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
-  onSubmit(props) {
-    return this.props.onSubmit({ ...props, country: this.state.country });
   }
 
   handleCheck() {
@@ -32,21 +27,18 @@ class LoginForm extends Component {
 
   render() {
     const { showPassword } = this.state;
-    const { handleSubmit, error, submitting } = this.props;
+    const { handleSubmit, error, submitting, onSubmit } = this.props;
 
     const iconEye = this.state.showPassword ? iconVisibilty : iconVisibiltyOff;
     const suffix = <img alt="eye" src={iconEye} className="icon-eye" onClick={this.handleCheck} />;// eslint-disable-line
 
     return (
-      <Form
-        className="login-form"
-        onSubmit={handleSubmit(this.onSubmit)}
-      >
+      <Form className="login-form" onSubmit={handleSubmit(onSubmit)}>
         <Field
-          name="phone"
-          className="login-form__mobile-input"
+          name="login"
+          className="login-form__input"
           component={renderInput}
-          placeholder="Enter Mobile Number"
+          placeholder="Login"
           validate={required}
         />
         <Field

@@ -24,7 +24,6 @@ class LoginScreen extends Component {
       <Layout>
         <Content className="login-container">
           <div className="panel">
-            <img className="img" src={vimchatLogo} alt="logo" />
             <span className="title">Welcome Back to VimChat!</span>
             <LoginForm onSubmit={this.onSubmit} />
             <span className="link-signup">
