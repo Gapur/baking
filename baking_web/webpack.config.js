@@ -8,6 +8,9 @@ module.exports = {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
   },
+  devServer: {
+    historyApiFallback: true,
+  },
   plugins: [
     new ExtractTextPlugin("style.css"),
   ],
