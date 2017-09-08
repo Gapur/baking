@@ -24,14 +24,11 @@ class LoginScreen extends Component {
     return (
       <Layout>
         <Content className="login-container">
-          <div className="panel">
-            <span className="title">Welcome Back to VimChat!</span>
-            <LoginForm onSubmit={this.onSubmit} />
-            <span className="link-signup">
-              <span>New to VimChat?</span>
-              <Link to="/signup">Sign up here</Link>
-            </span>
-          </div>
+          <LoginForm onSubmit={this.onSubmit} />
+          <span className="login-link">
+            <span>New to Baking?</span>
+            <Link to="/signup">Sign up here</Link>
+          </span>
         </Content>
       </Layout>
     );
