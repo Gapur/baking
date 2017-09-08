@@ -44,7 +44,7 @@ class LoginForm extends Component {
         />
         <Field
           name="password"
-          className="login-form__input"
+          className="login-form__input login-form__input--prefix"
           type={showPassword ? 'text' : 'password'}
           suffix={suffix}
           component={renderInput}
@@ -52,13 +52,19 @@ class LoginForm extends Component {
           validate={required}
         />
         <FormItem>
-          <Link className="login-form__link" to="forgot_password">Forgot Password?</Link>
+          <Link className="login-form__forgot-link" to="forgot_password">Forgot Password?</Link>
         </FormItem>
         <FormItem>
           <Button className="login-form__btn" type="primary" htmlType="submit" disabled={submitting}>
             {submitting ? 'Logging in...' : 'Log In'}
           </Button>
           {error && <span className="login-form__error"><i className="icon-error" />{error}</span>}
+        </FormItem>
+        <FormItem>
+          <span className="signup-link-box">
+            <span>New to Baking?</span>
+            <Link className="signup-link" to="/signup">Sign up here</Link>
+          </span>
         </FormItem>
       </Form>
     );

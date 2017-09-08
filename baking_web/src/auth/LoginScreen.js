@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { Layout } from 'antd';
-import { Link } from 'react-router-dom';
 
 import LoginForm from './components/LoginForm';
+import './styles/loginScreen.css';
 
 const { Content } = Layout;
 
@@ -25,10 +25,6 @@ class LoginScreen extends Component {
       <Layout>
         <Content className="login-container">
           <LoginForm onSubmit={this.onSubmit} />
-          <span className="login-link">
-            <span>New to Baking?</span>
-            <Link to="/signup">Sign up here</Link>
-          </span>
         </Content>
       </Layout>
     );
