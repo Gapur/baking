@@ -31,6 +31,18 @@ module.exports = {
         use: ExtractTextPlugin.extract('css-loader', 'style-loader')
       },
       {
+        test: /\.(woff2?|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 10000,
+              name: "fonts/[name].[ext]"
+            }
+          }
+        ]
+      },
+      {
         test: /\.(gif|png|jpe?g|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         use: [
           {
