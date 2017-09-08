@@ -4,8 +4,11 @@
   "description": "web baking",
   "main": "index.js",
   "scripts": {
+    "build-css": "node-sass src/ -o src/",
+    "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
     "webpack-devserver": "webpack-dev-server --hot --content-base public/",
-    "build": "webpack"
+    "build": "webpack",
+    "start": "npm-run-all -p watch-css webpack-devserver"
   },
   "author": "Gapur Kassym",
   "license": "ISC",
@@ -20,6 +23,8 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "style-loader": "^0.18.2",
+    "node-sass": "^4.5.3",
+    "npm-run-all": "^4.1.1",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"
   },
