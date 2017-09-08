@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Button } from 'antd';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
@@ -63,5 +64,11 @@ class LoginForm extends Component {
     );
   }
 }
+
+LoginForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+};
 
 export default reduxForm({ form: 'loginForm' })(LoginForm);
