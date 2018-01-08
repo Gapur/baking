@@ -24,6 +24,16 @@ class LoginScreen extends Component {
     return (
       <Layout>
         <Content className="login-container">
+          <div className="">
+            <h1>Built for developers</h1>
+            <p>
+              GitHub is a development platform inspired by
+              the way you work. From open source to business,
+              you can host and review code, manage projects,
+              and build software alongside millions of other
+              developers.
+            </p>
+          </div>
           <LoginForm onSubmit={this.onSubmit} />
         </Content>
       </Layout>
