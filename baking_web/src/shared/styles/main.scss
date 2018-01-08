@@ -2,14 +2,14 @@
   font-family: 'Avenir-Book';
   font-style: normal;
   font-weight: normal;
-  src: local("Avenir LT Std 45 Book"), url("fonts/avenir/AvenirLTStd-Book.woff") format("woff");
+  src: local("Avenir LT Std 45 Book"), url("shared/fonts/avenir/AvenirLTStd-Book.woff") format("woff");
 }
 
 @font-face {
   font-family: 'Avenir';
   font-style: normal;
   font-weight: normal;
-  src: local("Avenir LT Std 35 Light"), url("fonts/avenir/AvenirLTStd-Light.woff") format("woff");
+  src: local("Avenir LT Std 35 Light"), url("shared/fonts/avenir/AvenirLTStd-Light.woff") format("woff");
 }
 
 html, body, #root {
