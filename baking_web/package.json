@@ -6,7 +6,7 @@
   "scripts": {
     "watch": "webpack -d --watch-stdin --color",
     "deploy": "webpack -p",
-    "start": "webpack-dev-server --hot --content-base public/"
+    "start:local": "NODE_ENV=local webpack-dev-server --hot --content-base public/"
   },
   "author": "Gapur Kassym",
   "license": "ISC",

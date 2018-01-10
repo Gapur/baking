@@ -16,6 +16,11 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin("style.css"),
+    new webpack.DefinePlugin({
+      'process.env': {
+          'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }
+    }),
   ],
   module: {
     rules: [

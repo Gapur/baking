@@ -17,7 +17,7 @@ module.exports = function(mongoose, router, auth) {
             const token = jwt.sign(payload, config.passportJWT.jwtSecret, {
               expiresIn: "10h",
             });
-            res.json({ success: true, message: "ok", token: 'JWT ' + token });
+            res.json({ success: true, user, token: 'JWT ' + token });
           } else {
             res.status(401).json({ success: false, message: "Passwords did not match." });
           }
