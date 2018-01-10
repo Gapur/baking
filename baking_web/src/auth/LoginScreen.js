@@ -4,29 +4,37 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
 import LoginForm from './components/LoginForm';
+import { login } from './userActions';
+import { parseFormErrors } from '../shared/utils/form_errors';
 
 class LoginScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.onSubmit = this.onSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  onSubmit(values) {
-    console.log(values);
+  handleSubmit(values) {
+    const { login, push } = this.props;
+    return login(values)
+      .then(() => push('/'))
+      .catch(parseFormErrors);
   }
 
   render() {
     return (
-      <div id="login">
-
-      </div> 
+      <section className="section columns is-centered">
+        <div className="column is-4">
+          <LoginForm onSubmit={this.handleSubmit} />
+        </div>
+      </section>
     );
   }
 }
 
 LoginScreen.propTypes = {
+  login: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
 };
 
-export default connect(null, { push })(LoginScreen);
+export default connect(null, { login, push })(LoginScreen);
