@@ -1,14 +1,15 @@
+import React from 'react';
 import locationHelperBuilder from 'redux-auth-wrapper/history4/locationHelper';
 import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect';
 import connectedAuthWrapper from 'redux-auth-wrapper/connectedAuthWrapper';
 
-import Loading from './shared/components/Loading';
+const loading = <div className="loader-indicator" />;
 
 const locationHelper = locationHelperBuilder({});
 
 const userIsAuthenticatedDefaults = {
-  authenticatedSelector: state => state.user.data !== null,
-  authenticatingSelector: state => state.user.isLoading,
+  authenticatedSelector: state => state.user !== null,
+  authenticatingSelector: state => state.user !== null,
   wrapperDisplayName: 'UserIsAuthenticated',
 };
 
@@ -16,20 +17,20 @@ export const userIsAuthenticated = connectedAuthWrapper(userIsAuthenticatedDefau
 
 export const userIsAuthenticatedRedir = connectedRouterRedirect({
   ...userIsAuthenticatedDefaults,
-  AuthenticatingComponent: Loading,
+  AuthenticatingComponent: loading,
   redirectPath: '/login',
 });
 
 export const userIsAdminRedir = connectedRouterRedirect({
   redirectPath: '/',
   allowRedirectBack: false,
-  authenticatedSelector: state => state.user.data !== null && state.user.data.isAdmin,
+  authenticatedSelector: state => state.user !== null && state.user.isAdmin,
   predicate: user => user.isAdmin,
   wrapperDisplayName: 'UserIsAdmin',
 });
 
 const userIsNotAuthenticatedDefaults = {
-  authenticatedSelector: state => state.user.data === null,
+  authenticatedSelector: state => state.user === null,
   wrapperDisplayName: 'UserIsNotAuthenticated',
 };
 

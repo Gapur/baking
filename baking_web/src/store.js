@@ -6,6 +6,7 @@ import { reducer as reduxFormReducer } from 'redux-form';
 import { createLogger } from 'redux-logger';
 
 import notes from './notes/notesReducer';
+import user from './auth/userReducer';
 
 let middlewares = [thunk];
 
@@ -21,6 +22,7 @@ const historyMiddleware = routerMiddleware(history);
 
 const reducers = combineReducers({
   notes,
+  user,
   router: routerReducer,
   form: reduxFormReducer,
 });
