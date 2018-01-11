@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import NotesScreen from './notes/NotesScreen';
+import MainLayout from './shared/components/MainLayout';
 import LoginScreen from './auth/LoginScreen';
 import SignupScreen from './auth/SignupScreen';
 import ForgotPasswordScreen from './auth/ForgotPasswordScreen';
@@ -17,8 +17,7 @@ import {
 
 const RouterComponent = () =>
   <Switch>
-    <Route exact path="/" component={userIsAuthenticatedRedir(NotesScreen)} />
-    <Route exact path="/notes" component={userIsAuthenticatedRedir(NotesScreen)} />
+    <Route exact path="/" component={userIsAuthenticatedRedir(MainLayout)} />
     <Route exact path='/login' component={userIsNotAuthenticatedRedir(LoginScreen)} />
     <Route exact path='/signup' component={userIsNotAuthenticatedRedir(SignupScreen)} />
     <Route exact path='/forgot-password' component={userIsNotAuthenticatedRedir(ForgotPasswordScreen)} />

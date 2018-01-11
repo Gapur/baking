@@ -42,6 +42,10 @@ const SignupForm = ({ handleSubmit, error, submitting }) => {
   )  
 }
 
+SignupForm.defaultProps = {
+  error: '',
+};
+
 SignupForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,

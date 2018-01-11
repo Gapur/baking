@@ -46,6 +46,10 @@ const LoginForm = ({ handleSubmit, error, submitting }) => {
   );
 }
 
+LoginForm.defaultProps = {
+  error: '',
+};
+
 LoginForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,

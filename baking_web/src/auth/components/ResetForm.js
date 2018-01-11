@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { required, password, confirmation } from '../../shared/utils/form_validations';
 import { renderInput } from '../../shared/utils/form_components';
@@ -42,5 +43,15 @@ const ResetForm = ({ handleSubmit, error, submitting }) => {
     </form>
   );
 }
+
+ResetForm.defaultProps = {
+  error: '',
+};
+
+ResetForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+  error: PropTypes.string.isRequired,
+};
 
 export default reduxForm({ form: 'ResetForm' })(ResetForm);

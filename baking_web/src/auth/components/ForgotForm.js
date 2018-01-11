@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { required, email } from '../../shared/utils/form_validations';
 import { renderInput } from '../../shared/utils/form_components';
@@ -30,5 +31,15 @@ const ForgotForm = ({ handleSubmit, error, submitting }) => {
     </form>
   );
 }
+
+ForgotForm.defaultProps = {
+  error: '',
+};
+
+ForgotForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+  error: PropTypes.string.isRequired,
+};
 
 export default reduxForm({ form: 'ForgotForm' })(ForgotForm);
