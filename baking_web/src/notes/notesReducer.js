@@ -5,7 +5,7 @@ import {
   DELETE_NOTE,
 } from '../shared/constants/actionTypes';
 
-export default (state = [], action) => {
+export default (state = null, action) => {
   switch (action.type) {
     case FETCH_NOTES: {
       return action.payload; 

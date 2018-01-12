@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import Masonry from 'react-masonry-component';
+import axios from 'axios';
+
 import withData from '../shared/components/LoadingHoc';
 import { fetchNotes } from './notesActions';
 
-const connectWithData = compose(
+class NotesScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { editNoteId: null };
+  }
+  
+  render() {
+    console.log('notes', this.props.notes);
+    console.log(axios.defaults.headers.common['X-CSRF-TOKEN']);
+    return (
+      <div className="container">
+        <Masonry>
+          {this.props.notes.map(note => <li>{note.text}</li>)}
+        </Masonry>
+      </div>
+    );
+  }
+}
+
+export default compose(
   connect(({ notes }) => ({
     notes,
   }),
@@ -12,20 +35,7 @@ const connectWithData = compose(
   ),
   withData(
     ({ notes, fetchNotes }) => ({
-      loader: fetchNotes, isLoaded: notes != null,
+      loader: fetchNotes, isLoaded: notes != null
     })
   )
-);
-
-const Container = connectWithData(({ children }) => children);
-
-import EditNote from './EditNote';
-import NewNote from './NewNote';
-import NotesList from './NotesList';
-
-export {
-  Container,
-  EditNote,
-  NewNote,
-  NotesList,
-}
+)(NotesScreen);

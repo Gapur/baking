@@ -11,7 +11,6 @@ export const login = (payload) => (dispatch) => (
   axios.post('/login', payload)
     .then((res) => {
       dispatch({ type: LOGIN, payload: res.data });
-      axios.defaults.headers.common['X-CSRF-TOKEN'] = res.data.token;
       saveUser(res.data);
     })
 );
@@ -23,10 +22,7 @@ export const signup = (payload) => (dispatch) => (
 
 export const logout = () => (dispatch) => (
   axios.delete('/logout')
-    .then((res) => {
-      dispatch({ type: LOGOUT });
-      axios.defaults.headers.common['X-CSRF-TOKEN'] = null;
-    })
+    .then((res) => dispatch({ type: LOGOUT }))
 );
 
 export const updateUserInfo = (payload) => (dispatch) => (

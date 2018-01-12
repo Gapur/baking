@@ -8,7 +8,7 @@ import {
 
 export const fetchNotes = () => (dispatch) => (
   axios.get('/notes')
-    .then((res) => dispatch({ type: FETCH_NOTES, payload: res.data }))
+    .then((res) => dispatch({ type: FETCH_NOTES, payload: res.data.notes }))
 );
 
 export const createNote = (payload) => (dispatch) => (
