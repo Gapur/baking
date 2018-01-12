@@ -1,16 +1,25 @@
 import {
-  FETCH_NOTES_SUCCESS,
+  FETCH_NOTES,
+  CREATE_NOTE,
+  UPDATE_NOTE,
+  DELETE_NOTE,
 } from '../shared/constants/actionTypes';
 
-const INITIAL_STATE = {
-  notes: [],
-};
-
-export default (state = INITIAL_STATE, action) => {
+export default (state = [], action) => {
   switch (action.type) {
-    case FETCH_NOTES_SUCCESS:
-      return { ...state, notes: action.payload };
-    default:
-      return state;
+    case FETCH_NOTES: {
+      return action.payload; 
+    }
+    case CREATE_NOTE: {
+      return state && state.concat(action.payload);
+    }
+    case UPDATE_NOTE: {
+      return state && state.map(
+        note => note.id == action.payload.id ? action.payload : note);
+    }
+    case DELETE_NOTE: {
+      return state && state.filter(({ id }) => id != action.payload.id);
+    } 
   }
+  return state;
 };
