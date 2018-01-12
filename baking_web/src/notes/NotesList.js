@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-class NotesScreen extends Component {
+class NotesList extends Component {
   render() {
+    console.log(this.props.notes);
     return (
       <div>
         <span>Notes Detail</span>
@@ -10,4 +12,6 @@ class NotesScreen extends Component {
   }
 }
 
-export default NotesScreen;
+export default connect(
+  ({ notes }) => ({ notes })
+)(NotesList);

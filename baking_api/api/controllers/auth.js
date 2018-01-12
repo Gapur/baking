@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const config = require('../../config/config');
+const winston = require('winston');
 
 module.exports = function(mongoose, router, auth) {
   const User = mongoose.model("User");
@@ -44,6 +45,10 @@ module.exports = function(mongoose, router, auth) {
       });
     }
   });
+
+  router.delete('/logout', (req, res) => {
+    res.json({ token: null });
+  })
 
   router.get('/users', auth.authenticate(), (req, res) => {
     User.find({}, (err, users) => {

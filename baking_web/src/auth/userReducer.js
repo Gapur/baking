@@ -1,11 +1,19 @@
-export default (state = null, action) => {
+import { fetchInitialValues } from '../user_store';
+import {
+  LOGIN,
+  LOGOUT,
+  UPDATE_ACCOUNT,
+  SIGNUP,
+} from '../shared/constants/actionTypes';
+
+export default (state = fetchInitialValues(), action) => {
   switch (action.type) {
-    case 'UPDATE_ACCOUNT':
-    case 'SIGNUP':
-    case 'LOGIN': {
+    case SIGNUP:
+    case UPDATE_ACCOUNT:
+    case LOGIN: {
       return action.payload;
     }
-    case 'LOGOUT': {
+    case LOGOUT: {
       return null;
     }
   }
