@@ -17,7 +17,7 @@ import {
 
 const RouterComponent = () =>
   <Switch>
-    <Route exact path="/" component={userIsAuthenticatedRedir(MainLayout)} />
+    <Route exact path="/" component={MainLayout} />
     <Route exact path='/login' component={userIsNotAuthenticatedRedir(LoginScreen)} />
     <Route exact path='/signup' component={userIsNotAuthenticatedRedir(SignupScreen)} />
     <Route exact path='/forgot-password' component={userIsNotAuthenticatedRedir(ForgotPasswordScreen)} />

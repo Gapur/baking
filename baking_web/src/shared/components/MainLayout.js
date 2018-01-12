@@ -1,20 +1,16 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-export default () => (
-  <div id="main" className="container">
-    <nav className="navbar is-transparent">
-      <div className="navbar-brand">
-        <a className="navbar-item" href="https://bulma.io">
-          <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma" width="112" height="28" />
-        </a>
-        <div className="navbar-burger burger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-      <div className="navbar-menu">
-      </div>
-    </nav>
+import Header from './Header';
+import Recipes from '../../recipes';
+
+const MainLayout = () => (
+  <div id="main">
+    <Header />
+    <Switch>
+      <Route exact path="/recipes" component={Recipes} />
+    </Switch>
   </div>
 );
+
+export default MainLayout;
