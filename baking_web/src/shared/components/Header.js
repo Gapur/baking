@@ -34,7 +34,7 @@ class Header extends Component {
             <div className="navbar-item has-dropdown is-hoverable">
               <span className="navbar-link">User Name</span>
               <div className="navbar-dropdown">
-                <Link to="" className="navbar-item">Navbar</Link>
+                <Link to="/notes" className="navbar-item">My Notes</Link>
                 <a className="navbar-item" onClick={this.handleLogout}>Logout</a>
               </div>
             </div>

@@ -5,23 +5,53 @@ import Masonry from 'react-masonry-component';
 import axios from 'axios';
 
 import withData from '../shared/components/LoadingHoc';
-import { fetchNotes } from './notesActions';
+import { fetchNotes, createNote } from './notesActions';
+import Overlay from '../shared/components/Overlay';
+import NoteForm from './components/NoteForm';
+import { parseFormErrors } from '../shared/utils/form_errors';
 
 class NotesScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { editNoteId: null };
+    this.state = { showNoteModal: false, editNoteId: null };
+
+    this.handleCreateNote = this.handleCreateNote.bind(this);
+  }
+
+  handleCreateNote(values) {
+    return this.props.createNote(values)
+      .then(() => this.setState({ showNoteModal: false }))
+      .catch(parseFormErrors); 
   }
   
   render() {
-    console.log('notes', this.props.notes);
-    console.log(axios.defaults.headers.common['X-CSRF-TOKEN']);
+    const { notes } = this.props;
     return (
       <div className="container">
+        <button
+          className="button is-primary"
+          onClick={() => this.setState({ showNoteModal: true })}
+        >
+          New Note
+        </button> 
         <Masonry>
-          {this.props.notes.map(note => <li>{note.text}</li>)}
+          {notes.map(note =>
+            <div className="box content">
+              <h5>{note.title}</h5>
+              <p>{note.text}</p>
+            </div>
+          )}
         </Masonry>
+        
+        {this.state.showNoteModal &&
+          <Overlay>
+            <NoteForm
+              onSubmit={this.handleCreateNote}
+              onCancel={() => this.setState({ showNoteModal: false })}
+            />
+          </Overlay>
+        }
       </div>
     );
   }
@@ -31,7 +61,7 @@ export default compose(
   connect(({ notes }) => ({
     notes,
   }),
-    { fetchNotes }
+    { fetchNotes, createNote }
   ),
   withData(
     ({ notes, fetchNotes }) => ({

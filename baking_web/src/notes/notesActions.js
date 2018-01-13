@@ -12,7 +12,7 @@ export const fetchNotes = () => (dispatch) => (
 );
 
 export const createNote = (payload) => (dispatch) => (
-  axios.post('/notes', { note: payload })
+  axios.post('/notes', payload)
     .then((res) => dispatch({ type: CREATE_NOTE, payload: res.data }))
 );
 

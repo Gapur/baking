@@ -4,11 +4,11 @@ const KEY = 'user';
 
 export const saveUser = (user) => {
   sessionStorage.setItem(KEY, JSON.stringify(user));
-  axios.defaults.headers.common['X-CSRF-TOKEN'] = user.token;
+  axios.defaults.headers.common['Authorization'] = user.token;
 };
 
 export const fetchInitialValues = () => {
-  const initialValues = JSON.parse(sessionStorage.getItem(KEY));
-  axios.defaults.headers.common['X-CSRF-TOKEN'] = initialValues ? initialValues.token : null;
-  return initialValues || null;
+  const userInfo = JSON.parse(sessionStorage.getItem(KEY));
+  axios.defaults.headers.common['Authorization'] = userInfo ? userInfo.token : null;
+  return userInfo || null;
 };
