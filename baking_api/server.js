@@ -23,6 +23,7 @@ mongoose.connect(dbUrl, (err) => {
 //register each model with Mongoose
 require('./api/models/note');
 require('./api/models/user');
+require('./api/models/recipe');
 
 //setup Express
 const app = express();

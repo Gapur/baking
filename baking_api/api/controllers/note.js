@@ -30,7 +30,7 @@ module.exports = function (mongoose, router, auth) {
       if (err) {
 				res.status(400).json({ error: err.message });
 			} else {
-				res.status(201).json({ note, message: "Successfully new note created." });
+				res.status(201).json({ note });
 			}
     });
   });
@@ -46,11 +46,11 @@ module.exports = function (mongoose, router, auth) {
         for (let key in req.body) {
 					note[key] = req.body[key];
         }
-        note.save((err) => {
+        note.save((err, note) => {
           if (err) {
 						res.status(400).json({ error: err.message });
 					} else {
-						res.json({ message: "Successfully note updated." });
+						res.json({ note });
 					}
         });
       }

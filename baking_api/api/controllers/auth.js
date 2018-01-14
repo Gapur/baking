@@ -8,9 +8,9 @@ module.exports = function(mongoose, router, auth) {
   router.post('/login', (req, res) => {
     User.findOne({ email: req.body.email }, (err, user) => {
       if (err) {
-        res.status(400).json({ success: false, error: err.message });
+        res.status(400).json({ error: err.message });
       } else if (!user) {
-        res.status(400).json({ success: false, error: "User not found." });
+        res.status(400).json({ error: "User not found." });
       } else {
         user.comparePassword(req.body.password, (err, isMatch) => {
           if (isMatch && !err) {
@@ -18,9 +18,12 @@ module.exports = function(mongoose, router, auth) {
             const token = jwt.sign(payload, config.passportJWT.jwtSecret, {
               expiresIn: "10h",
             });
-            res.json({ success: true, user, token: 'JWT ' + token });
+            const data = {
+              email: user.email,
+            }
+            res.json({ user: data, token: 'JWT ' + token });
           } else {
-            res.status(401).json({ success: false, message: "Passwords did not match." });
+            res.status(401).json({ error: "Passwords did not match." });
           }
         });
       }
@@ -29,7 +32,7 @@ module.exports = function(mongoose, router, auth) {
 
   router.post('/signup', (req, res) => {
     if (!req.body.email || !req.body.password) {
-      res.status(400).json({ success: false, message: ' Please enter email or password.' });
+      res.status(400).json({ error: ' Please enter email or password.' });
     } else {
       const newUser = new User({
         email: req.body.email,
@@ -38,10 +41,9 @@ module.exports = function(mongoose, router, auth) {
 
       newUser.save((err) => {
         if (err) {
-          res.status(400)
-            .json({ success: false, message: 'That email address already exists.' });
+          res.status(400).json({ error: 'That email address already exists.' });
         }
-        res.status(201).json({ success: true, message: 'Successfully created new user.' });
+        res.status(201).json({ message: 'Successfully created new user.' });
       });
     }
   });
@@ -53,7 +55,7 @@ module.exports = function(mongoose, router, auth) {
   router.get('/users', auth.authenticate(), (req, res) => {
     User.find({}, (err, users) => {
       if (err) {
-        res.status(400).json({ message: err.message });
+        res.status(400).json({ error: err.message });
       } else {
         res.json({ users });
       }
