@@ -7,6 +7,7 @@ import { createLogger } from 'redux-logger';
 
 import notes from './notes/notesReducer';
 import user from './auth/userReducer';
+import recipes from './recipes/recipesReducer';
 
 let middlewares = [thunk];
 
@@ -23,6 +24,7 @@ const historyMiddleware = routerMiddleware(history);
 const reducers = combineReducers({
   notes,
   user,
+  recipes,
   router: routerReducer,
   form: reduxFormReducer,
 });

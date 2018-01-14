@@ -2,18 +2,20 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Header from './Header';
-import * as Recipes from '../../recipes';
+import RecipesScreen from '../../recipes';
+import NewRecipe from '../../recipes/NewRecipe';
+import EditRecipe from '../../recipes/EditRecipe';
 import NotesScreen from '../../notes';
 
 const MainLayout = () => (
   <div id="main">
     <Header />
     <Switch>
-      <Route exact path="/recipes" component={Recipes.RecipesList} />
-      <Route exact path="/recipes/new" component={Recipes.NewRecipe} />
-      <Route exact path="/recipes/edit/:id" component={Recipes.EditRecipe} />
+      <Route exact path="/recipes" component={RecipesScreen} />
+      <Route exact path="/recipes/new" component={NewRecipe} />
+      <Route exact path="/recipes/edit/:id" component={EditRecipe} />
       <Route exact path="/notes" component={NotesScreen} />
-      <Route path="/" component={Recipes.RecipesList} />
+      <Route path="/" component={RecipesScreen} />
     </Switch>
   </div>
 );

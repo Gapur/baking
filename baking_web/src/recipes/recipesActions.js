@@ -6,10 +6,10 @@ import {
   DELETE_RECIPE,
 } from '../shared/constants/actionTypes';
 
-export const fetchRecipes = () => (dispatch) => (
+export const fetchRecipes = () => (dispatch) => {
   axios.get('/recipes')
-    .then((res) => dispatch({ type: FETCH_RECIPES, payload: res.data }))
-);
+    .then((res) => dispatch({ type: FETCH_RECIPES, payload: res.data.recipes }))
+};
 
 export const createRecipe = (payload) => (dispatch) => (
   axios.post('/recipes', payload)
