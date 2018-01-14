@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Masonry from 'react-masonry-component';
-import axios from 'axios';
 
 import withData from '../shared/components/LoadingHoc';
 import { fetchNotes, createNote } from './notesActions';
@@ -22,24 +21,48 @@ class NotesScreen extends Component {
   handleCreateNote(values) {
     return this.props.createNote(values)
       .then(() => this.setState({ showNoteModal: false }))
-      .catch(parseFormErrors); 
+      .catch(parseFormErrors);
+  }
+
+  renderHeader() {
+    return (
+      <nav className="navbar is-transparent">
+        <div className="navbar-brand">
+          <div className="navbar-item">
+            <h4 className="title is-4">My Notes</h4>
+          </div>
+        </div>
+        <div className="navbar-menu">
+          <div className="navbar-start"></div>
+          <div className="navbar-end">
+            <div className="navbar-item">
+              <button
+                className="button is-primary "
+                onClick={() => this.setState({ showNoteModal: true })}
+              >
+                New Note
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    );
   }
   
   render() {
     const { notes } = this.props;
     return (
-      <div className="container">
-        <button
-          className="button is-primary"
-          onClick={() => this.setState({ showNoteModal: true })}
-        >
-          New Note
-        </button> 
-        <Masonry>
+      <div className="container is-widescreen">
+      
+        {this.renderHeader()}
+         
+        <Masonry className="columns is-multiline">
           {notes.map(note =>
-            <div className="box content">
-              <h5>{note.title}</h5>
-              <p>{note.text}</p>
+            <div className="column is-3">
+              <div className="box content">
+                <h5>{note.title}</h5>
+                <p>{note.text}</p>
+              </div>
             </div>
           )}
         </Masonry>

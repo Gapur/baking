@@ -9,7 +9,10 @@ const MainLayout = () => (
   <div id="main">
     <Header />
     <Switch>
-      <Route exact path="/recipes" component={Recipes} />
+      <Route path="/" component={Recipes.RecipesList} />
+      <Route exact path="/recipes" component={Recipes.RecipesList} />
+      <Route exact path="/recipes/new" component={Recipes.NewRecipe} />
+      <Route exact path="/recipes/edit/:id" component={Recipes.EditRecipe} />
       <Route exact path="/notes" component={NotesScreen} />
     </Switch>
   </div>
