@@ -35,7 +35,9 @@ class Header extends Component {
               <div className="navbar-item has-dropdown is-hoverable">
                 <span className="navbar-link">{this.props.user.user.email}</span>
                 <div className="navbar-dropdown">
+                  <Link to="/" className="navbar-item">Account Setting</Link>
                   <Link to="/notes" className="navbar-item">My Notes</Link>
+                  <Link to="/recipes" className="navbar-item">My Recipes</Link>
                   <a className="navbar-item" onClick={this.handleLogout}>Logout</a>
                 </div>
               </div>

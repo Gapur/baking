@@ -52,7 +52,7 @@ class NotesScreen extends Component {
   render() {
     const { notes } = this.props;
     return (
-      <div className="container is-widescreen">
+      <div className="container">
       
         {this.renderHeader()}
          
