@@ -32,6 +32,27 @@ class RecipesList extends Component {
       </nav>
     );
   }
+
+  renderRecipe(recipe) {
+    return (
+      <div
+        key={recipe._id}
+        className="column is-3"
+        onClick={() => this.handleClick(recipe._id)}
+        >
+        <div className="card">
+          <div className="card-image">
+            <figure className="image is-4by3">
+              <img src={recipe.image} alt="recipe" />
+            </figure>
+          </div>
+          <div className="card-content">
+            <h4 className="title is-4">{recipe.name}</h4>
+          </div>
+        </div>
+      </div>
+    );
+  }
   
   render() {
     return (
@@ -39,20 +60,7 @@ class RecipesList extends Component {
         {this.renderHeader()}
           
         <Masonry className="columns is-multiline">
-          {this.props.recipes.map(recipe =>
-            <div className="column is-3" onClick={() => this.handleClick(recipe._id)}>
-              <div className="card">
-                <div className="card-image">
-                  <figure className="image is-4by3">
-                    <img src={recipe.image} alt="recipe" />
-                  </figure>
-                </div>
-                <div className="card-content">
-                  <h4 className="title is-4">{recipe.name}</h4>
-                </div>
-              </div>
-            </div>
-          )}
+          {this.props.recipes.map(this.renderRecipe)}
         </Masonry>
       </div>
     );

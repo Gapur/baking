@@ -31,14 +31,27 @@ const LoginForm = ({ handleSubmit, error, submitting }) => {
       <div className="field is-horizontal">
         <div className="field-label"></div>
         <div className="field-body">
-          <div className="control">
-            <button className={`button ${btnState} is-primary`}>
-              Login
-            </button>
-            {error && <p className="help is-danger">{error}</p>}
+          <div className="field is-grouped">
+            <div className="control">
+              <button className={`button ${btnState} is-primary`}>
+                Login
+              </button>
+              {error && <p className="help is-danger">{error}</p>}
+            </div>
+            <div className="control">
+              <Link className="button is-text" to={'/forgot-password'}>
+                Forgot password?
+              </Link>
+            </div>
           </div>
-          <div className="control forgot-link">
-            <Link to={'/forgot-password'}>Forgot password?</Link>
+        </div>
+      </div>
+
+      <div className="field is-horizontal">
+        <div className="field-label"></div>
+        <div className="field-body">
+          <div className="field">
+            New to Baking?<Link to="/signup">{` Create Account`}</Link>
           </div>
         </div>
       </div>

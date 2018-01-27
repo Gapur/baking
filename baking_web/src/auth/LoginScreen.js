@@ -6,6 +6,7 @@ import { push } from 'react-router-redux';
 import LoginForm from './components/LoginForm';
 import { login } from './userActions';
 import { parseFormErrors } from '../shared/utils/form_errors';
+import ratatuy from '../shared/img/ratatuy.png';
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -23,9 +24,20 @@ class LoginScreen extends Component {
 
   render() {
     return (
-      <section className="section columns is-centered">
-        <div className="column is-4">
-          <LoginForm onSubmit={this.handleSubmit} />
+      <section className="hero is-fullheight">
+        <div className="hero-body columns is-centered">
+          <div className="box box-login">
+            <article className="media columns is-vcentered">
+              <div className="media-left column is-3">
+                <figure>
+                  <img src={ratatuy} alt="Welcome" height="480" />
+                </figure>
+              </div>
+              <div className="media-content column is-8">
+                <LoginForm onSubmit={this.handleSubmit} />
+              </div>
+            </article>
+          </div>
         </div>
       </section>
     );

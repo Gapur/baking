@@ -9,6 +9,7 @@ import EditRecipe from './EditRecipe';
 import RecipesList from './RecipesList';
 import MyRecipesList from './MyRecipesList';
 import NewRecipe from './NewRecipe';
+import RecipeDetails from './RecipeDetails';
 
 const RecipesScreen = () => {
   return (
@@ -18,7 +19,7 @@ const RecipesScreen = () => {
         <Route exact path="/recipes/my" component={MyRecipesList} />
         <Route exact path="/recipes/my/edit/:id" component={EditRecipe} />
         <Route exact path="/recipes/my/new" component={NewRecipe} />
-        <Route exact path="/recipes/:id" component={EditRecipe} />
+        <Route exact path="/recipes/:id" component={RecipeDetails} />
         <Route path="/" component={RecipesList} />
       </Switch>
     </div>
