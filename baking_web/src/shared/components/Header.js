@@ -22,7 +22,7 @@ class Header extends Component {
         <div className="container">
           <div className="navbar-brand">
             <Link className="navbar-item navbar-logo" to="/">
-              <img className="navbar-logo-img" src={logo} alt="Bulma" />BAKING
+              <img className="navbar-logo-img" src={logo} alt="Cook" />BAKING
             </Link>
             <div className="navbar-burger burger">
               <span></span>
@@ -39,7 +39,7 @@ class Header extends Component {
                   <Link to="/" className="navbar-item">Account Setting</Link>
                   <Link to="/recipes" className="navbar-item">All Recipes</Link>
                   <Link to="/notes" className="navbar-item">My Notes</Link>
-                  <Link to="/my-recipes" className="navbar-item">My Recipes</Link>
+                  <Link to="/recipes/my" className="navbar-item">My Recipes</Link>
                   <a className="navbar-item" onClick={this.handleLogout}>Logout</a>
                 </div>
               </div>

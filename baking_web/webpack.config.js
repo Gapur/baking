@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -10,11 +11,14 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
-  },
-  devServer: {
-    historyApiFallback: true,
+    publicPath: '/',
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: require('html-webpack-template'),
+      title: "baking",
+      appMountId: "app-container",
+    }),
     new ExtractTextPlugin("style.css"),
     new webpack.DefinePlugin({
       'process.env': {
@@ -73,5 +77,10 @@ module.exports = {
         ]
       }
     ]
+  },
+  devServer: {
+    contentBase: '/',
+    historyApiFallback: true,
+    compress: true,
   },
 };

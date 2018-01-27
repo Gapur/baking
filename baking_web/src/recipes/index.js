@@ -2,11 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Masonry from 'react-masonry-component';
+import { push } from 'react-router-redux';
 
 import withData from '../shared/components/LoadingHoc';
 import { fetchRecipes } from './recipesActions';
 
 class RecipesScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(id) {
+    this.props.push(`/recipes/edit/${id}`);
+  }
 
   renderHeader() {
     return (
@@ -34,7 +44,7 @@ class RecipesScreen extends Component {
         
         <Masonry className="columns is-multiline">
           {this.props.recipes.map(recipe =>
-            <div className="column is-3">
+            <div className="column is-3" onClick={() => this.handleClick(recipe._id)}>
               <div className="card">
                 <div className="card-image">
                   <figure className="image is-4by3">
@@ -45,8 +55,8 @@ class RecipesScreen extends Component {
                   <h4 className="title is-4">{recipe.name}</h4>
                 </div>
               </div>
-            </div> 
-          )} 
+            </div>
+          )}
         </Masonry>
       </div>
     );
@@ -57,7 +67,7 @@ export default compose(
   connect(({ recipes }) => ({
     recipes
   }),
-    { fetchRecipes }
+    { fetchRecipes, push }
   ),
   withData(
     ({ recipes, fetchRecipes }) => ({

@@ -6,7 +6,7 @@
   "scripts": {
     "watch": "webpack -d --watch-stdin --color",
     "deploy": "webpack -p",
-    "start:local": "NODE_ENV=local webpack-dev-server --hot --content-base public/"
+    "start:local": "NODE_ENV=local webpack-dev-server"
   },
   "author": "Gapur Kassym",
   "license": "ISC",
@@ -20,6 +20,8 @@
     "css-loader": "^0.28.8",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.30.1",
+    "html-webpack-template": "^6.1.0",
     "node-sass": "^4.5.3",
     "redux-logger": "^3.0.6",
     "sass-loader": "^6.0.6",
