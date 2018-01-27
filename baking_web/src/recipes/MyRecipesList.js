@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { push } from 'react-router-redux';
 import Masonry from 'react-masonry-component';
 
-import withData from '../shared/components/LoadingHoc';
-import { fetchRecipes } from './recipesActions';
-
-class MyRecipesScreen extends Component {
+class MyRecipesList extends Component {
   
   renderHeader() {
     return (
@@ -34,23 +31,15 @@ class MyRecipesScreen extends Component {
   
   render() {
     return (
-      <div className="container">
+      <div id="my-recipes">
         {this.renderHeader()}
-        
+         
       </div>
     )
   }
 }
 
-export default compose(
-  connect(({ recipes }) => ({
-    recipes
-  }),
-    { fetchRecipes }
-  ),
-  withData(
-    ({ recipes, fetchRecipes }) => ({
-      loader: fetchRecipes, isLoaded: recipes != null,
-    })
-  )
-)(MyRecipesScreen);
+export default connect(
+  ({ recipes }) => ({ recipes }),
+  { push }
+)(MyRecipesList);

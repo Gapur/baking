@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -14,9 +15,12 @@ module.exports = {
     publicPath: '/',
   },
   plugins: [
+    new CleanWebpackPlugin(['public']),
     new HtmlWebpackPlugin({
+      inject: false,
+      favicon: './src/shared/img/baking.png',
       template: require('html-webpack-template'),
-      title: "baking",
+      title: "Baking",
       appMountId: "app-container",
     }),
     new ExtractTextPlugin("style.css"),
