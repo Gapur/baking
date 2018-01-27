@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { logout } from '../../auth/userActions';
+import logo from '../img/baking.png';
 
 class Header extends Component {
   constructor(props) {
@@ -20,8 +21,8 @@ class Header extends Component {
       <nav className="navbar is-warning">
         <div className="container">
           <div className="navbar-brand">
-            <Link className="navbar-item" to="/">
-              <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma" width="112" height="28" />
+            <Link className="navbar-item navbar-logo" to="/">
+              <img className="navbar-logo-img" src={logo} alt="Bulma" />BAKING
             </Link>
             <div className="navbar-burger burger">
               <span></span>
