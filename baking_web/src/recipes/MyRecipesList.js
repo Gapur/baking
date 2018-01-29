@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import Masonry from 'react-masonry-component';
+import { Link } from 'react-router-dom';
 
 class MyRecipesList extends Component {
   
@@ -17,11 +18,9 @@ class MyRecipesList extends Component {
           <div className="navbar-start"></div>
           <div className="navbar-end">
             <div className="navbar-item">
-              <button
-                className="button is-primary "
-              >
+              <Link className="button is-primary" to="/recipes/my/new">
                 New Recipe
-              </button>
+              </Link>
             </div>
           </div>
         </div>

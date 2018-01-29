@@ -21,6 +21,51 @@ class RecipeForm extends Component {
         />
 
         <Field
+          name="prep"
+          component={renderInput}
+          layout="vertical"
+          label="Prep"
+          placeholder="Prep"
+          validate={required}
+        />
+
+        <Field
+          name="cook"
+          component={renderInput}
+          layout="vertical"
+          label="Cook"
+          placeholder="Cook"
+          validate={required}
+        />
+
+        <Field
+          name="level"
+          component={renderInput}
+          layout="vertical"
+          label="Cooking level" 
+          placeholder="Cook"
+          validate={required}
+        />
+
+        <Field
+          name="categories"
+          component={renderInput}
+          layout="vertical"
+          label="Categories" 
+          placeholder="categories"
+          validate={required}
+        />
+
+        <Field
+          name="ingredients"
+          component={renderInput}
+          layout="vertical"
+          label="Ingredients" 
+          placeholder="ingredients"
+          validate={required}
+        />
+        
+        <Field
           name="description"
           component={renderTextarea}
           layout="vertical"

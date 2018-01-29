@@ -17,8 +17,8 @@ const RecipesScreen = () => {
       <Switch>
         <Route exact path="/recipes" component={RecipesList} />
         <Route exact path="/recipes/my" component={MyRecipesList} />
-        <Route exact path="/recipes/my/edit/:id" component={EditRecipe} />
         <Route exact path="/recipes/my/new" component={NewRecipe} />
+        <Route exact path="/recipes/my/edit/:id" component={EditRecipe} />
         <Route exact path="/recipes/:id" component={RecipeDetails} />
         <Route path="/" component={RecipesList} />
       </Switch>

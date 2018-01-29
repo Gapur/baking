@@ -60,7 +60,7 @@ class RecipesList extends Component {
         {this.renderHeader()}
           
         <Masonry className="columns is-multiline">
-          {this.props.recipes.map(this.renderRecipe)}
+          {this.props.recipes.map(recipe => this.renderRecipe(recipe))}
         </Masonry>
       </div>
     );

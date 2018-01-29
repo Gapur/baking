@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 import RecipeForm from './components/RecipeForm';
 
@@ -16,11 +17,11 @@ class NewRecipe extends Component {
 
   render() {
     return (
-      <div>
-        <RecipeForm onSubmit={this.handleSubmit} /> 
+      <div id="new-recipe">
+        <RecipeForm onSubmit={this.handleSubmit} />
       </div>
     )
   }
 }
 
-export default connect(null, { })(NewRecipe);
+export default connect(null, { push })(NewRecipe);
