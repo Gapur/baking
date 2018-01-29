@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { required } from '../../shared/utils/form_validations';
-import { renderInput, renderTextarea } from '../../shared/utils/form_components';
+import { renderInput, renderTextarea, renderSelect } from '../../shared/utils/form_components';
+import { RECIPE_LEVELS } from '../../shared/constants/constants';
 
 class RecipeForm extends Component {
   render() {
@@ -40,7 +41,8 @@ class RecipeForm extends Component {
 
         <Field
           name="level"
-          component={renderInput}
+          component={renderSelect}
+          options={RECIPE_LEVELS}
           layout="vertical"
           label="Cooking level" 
           placeholder="Cook"
@@ -64,6 +66,15 @@ class RecipeForm extends Component {
           placeholder="ingredients"
           validate={required}
         />
+
+        <Field
+          name="methods"
+          component={renderTextarea}
+          layout="vertical"
+          label="Methods"
+          placeholder="How to cook"
+          validate={required}
+        />
         
         <Field
           name="description"
@@ -71,6 +82,15 @@ class RecipeForm extends Component {
           layout="vertical"
           label="Description"
           placeholder="Description"
+          validate={required}
+        />
+
+        <Field
+          name="Image"
+          component={renderInput}
+          layout="vertical"
+          label="Image Url"
+          placeholder="Just image url link"
           validate={required}
         />
 

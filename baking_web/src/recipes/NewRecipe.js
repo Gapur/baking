@@ -18,6 +18,7 @@ class NewRecipe extends Component {
   render() {
     return (
       <div id="new-recipe">
+        <h4 className="title is-4">New Recipe</h4>
         <RecipeForm onSubmit={this.handleSubmit} />
       </div>
     )
