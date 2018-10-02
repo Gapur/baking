@@ -1,6 +1,5 @@
 # dependencies
-/baking_api/node_modules
-/baking_web/node_modules
+/node_modules
 
 # only sass files
 /baking_web/src/**/*.css
