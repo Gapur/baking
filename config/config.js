@@ -2,7 +2,7 @@ module.exports = {
 	passportJWT: {
 		jwtSecret: "MyS3cr3tK3Y",
 		jwtSession: {
-				session: false
+			session: false
 		},
 	},
   test: {
@@ -17,19 +17,7 @@ module.exports = {
 			port: "8081"
 		},
 	},
-  local: {
-		environment: "local",
-		mongo: {
-			host: "localhost",
-			port: "27017",
-			database: "bakin_db_local",
-		},
-		server: {
-			host: "localhost",
-			port: "8080"
-		},
-	},
-  dev: {
+	dev: {
 		environment: "dev",
 		mongo: {
 			host: "localhost",
