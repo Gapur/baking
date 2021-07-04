@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const config = require('../../config/config');
-const winston = require('winston');
 
 module.exports = function(mongoose, router, auth) {
   const User = mongoose.model("User");
@@ -32,7 +31,7 @@ module.exports = function(mongoose, router, auth) {
 
   router.post('/signup', (req, res) => {
     if (!req.body.email || !req.body.password) {
-      res.status(400).json({ error: ' Please enter email or password.' });
+      res.status(400).json({ error: 'Please enter email or password.' });
     } else {
       const newUser = new User({
         email: req.body.email,
